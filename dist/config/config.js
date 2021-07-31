@@ -1,4 +1,6 @@
-export default {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
     jwtSecret: process.env.JWT_SECRET || 'A54MB134',
     DB: {
         USER: process.env.DB_USER || 'asamblea',

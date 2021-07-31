@@ -1,5 +1,8 @@
 import express from 'express'
 import morgan from 'morgan'
+import routes from './routes/routes';
+
+import route from './routes/routes'
 
 // init
 const app = express();
@@ -13,6 +16,6 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 // routes
-
+app.use('/', routes)
 
 export default app;
