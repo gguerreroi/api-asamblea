@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import * as Seguridad from "../controllers/Seguridad.controller"
 import * as Votacion from "../controllers/Votaciones.controller"
+import * as Asamblea from "../controllers/Asamblea.controller"
 const r = Router();
 
 r.get(
@@ -19,5 +20,9 @@ r.get(
     "/admin/login",
     Seguridad.admin_login
 )
+
+r.get("/asamblea/resultados", Asamblea.resultados)
+
+r.post('/asamblea/votar/', Asamblea.emitirVoto)
 
 export default r

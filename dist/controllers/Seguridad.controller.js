@@ -70,6 +70,7 @@ const admin_login = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 return res.status(401).send(JsonOut_1.JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
             }
             else {
+                console.log(error);
                 return res.status(500).send(JsonOut_1.JsonOut('0', "Se produjo un error al ejecutar", error));
             }
         });

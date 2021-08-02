@@ -65,6 +65,7 @@ export const admin_login = async (req: Request,
 
 
             } else {
+                console.log(error)
                 return res.status(500).send(JsonOut('0', "Se produjo un error al ejecutar", error))
             }
         })
