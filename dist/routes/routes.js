@@ -21,6 +21,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Seguridad = __importStar(require("../controllers/Seguridad.controller"));
+const Votacion = __importStar(require("../controllers/Votaciones.controller"));
 const r = express_1.Router();
-r.get("/asociados/login", Seguridad.login);
+r.get("/asociados/login", Seguridad.asociados_login);
+r.get("/asociados/votaciones/:codcliente", Votacion.votaciones);
+r.get("/asociados/opciones/", Votacion.opciones);
+r.get("/admin/login", Seguridad.admin_login);
 exports.default = r;

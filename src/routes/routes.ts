@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import * as Seguridad from "../controllers/Seguridad.controller"
-import {asociados_login} from "../controllers/Seguridad.controller";
+import * as Votacion from "../controllers/Votaciones.controller"
 const r = Router();
 
 r.get(
@@ -8,8 +8,16 @@ r.get(
     Seguridad.asociados_login
     )
 
+r.get("/asociados/votaciones/:codcliente",
+    Votacion.votaciones
+    )
+
+r.get("/asociados/opciones/",
+    Votacion.opciones)
+
 r.get(
-    "/admin/login"
+    "/admin/login",
+    Seguridad.admin_login
 )
 
 export default r
