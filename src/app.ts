@@ -2,8 +2,6 @@ import express from 'express'
 import morgan from 'morgan'
 import routes from './routes/routes';
 
-import route from './routes/routes'
-
 // init
 const app = express();
 

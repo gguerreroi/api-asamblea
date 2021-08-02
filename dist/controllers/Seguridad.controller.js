@@ -8,10 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_1 = require("../database");
 const JsonOut_1 = require("../middlewares/JsonOut");
+const config_1 = __importDefault(require("../config/config"));
+const createToken = (UserInfo) => {
+    return jsonwebtoken_1.default.sign(UserInfo, config_1.default.jwtSecret);
+};
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let Connection = null;
     const { cui, cuenta } = req.body;
@@ -24,7 +32,12 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         sp.output("StrMsj", database_1.mssql.VarChar(400));
         sp.execute('Asociados.sp_login', (error, results) => {
             if (!error) {
-                return res.status(200).send(JsonOut_1.JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
+                if (results.output.CodMsj == 1) {
+                    const UserInfo = results.recordset[0];
+                    UserInfo.Token = createToken(UserInfo);
+                    return res.status(200).send(JsonOut_1.JsonOut(results.output.CodMsj, results.output.StrMsj, UserInfo));
+                }
+                return res.status(401).send(JsonOut_1.JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
             }
             else {
                 return res.status(500).send(JsonOut_1.JsonOut('0', "Se produjo un error al ejecutar", error));
