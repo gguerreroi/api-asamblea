@@ -8,7 +8,8 @@ export async function votaciones(req: Request, res: Response) {
     try {
         Connection = await getConnection()
         const sp = await Connection.request();
-        sp.input("CodCliente", mssql.Int, codcliente)
+        if (codcliente != undefined)
+            sp.input("CodCliente", mssql.Int, codcliente)
         sp.output("CodMsj", mssql.Int)
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_core', (error: any, results: any) => {
