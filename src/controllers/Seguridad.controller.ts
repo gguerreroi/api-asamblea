@@ -7,6 +7,11 @@ import config from "../config/config";
 const createToken = (UserInfo: any) => {
     return jwt.sign(UserInfo, config.jwtSecret)
 }
+export const asociados_asistencia = async (req: Request, res: Response) => {
+    let Connection = null
+    console.log(req.body)
+    return res.status(200).send(JsonOut("1", "Asistencia registrada con exito", req.body))
+}
 
 export const asociados_login = async (req: Request,
                                       res: Response) => {
