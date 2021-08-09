@@ -12,6 +12,7 @@ r.get("/asociados/opciones/", Votacion.opciones)
 r.get("/votaciones", Votacion.votaciones)
 r.get("/admin/login", Seguridad.admin_login)
 r.get("/asamblea/resultados", Asamblea.resultados)
+r.get("/asamblea/asistencia", Asamblea.asistencia)
 r.post('/asamblea/votar/', Asamblea.emitirVoto)
 
 export default r

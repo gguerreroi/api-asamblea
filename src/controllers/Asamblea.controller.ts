@@ -29,7 +29,31 @@ export async function emitirVoto(req: Request, res: Response) {
         return res.status(200).send(JsonOut("0", "Lista de votaciones", []));
     }
 }
+export async function asistencia(req: Request, res: Response){
+    let Connection = null
 
+    try {
+        Connection = await getConnection()
+        const sp = await Connection.request();
+
+        sp.output("CodMsj", mssql.Int)
+        sp.output("StrMsj", mssql.VarChar(400))
+        sp.execute('Asamblea.sp_asistencia', (error: any, results: any) => {
+
+            if (!error){
+
+                return res.status(200).send(JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
+            }
+
+
+            return res.status(200).send(JsonOut("0", "Se produjo un error", error));
+        })
+    } catch (e: any) {
+        console.log("entro a error")
+        const {Code, Message} = Connection;
+        return res.status(200).send(JsonOut("0", "Lista de votaciones", []));
+    }
+}
 export async function resultados(req: Request, res: Response){
     let Connection = null
 
