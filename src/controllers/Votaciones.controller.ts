@@ -29,12 +29,12 @@ export async function votaciones(req: Request, res: Response) {
 
 export async function IniciarVotacion(req: Request, res: Response) {
     let Connection = null
-    const {codvotaciones} = req.params;
+    const {codvotacion} = req.params;
     try {
         Connection = await getConnection()
         const sp = await Connection.request();
 
-        sp.input("codvotacion", mssql.Int, codvotaciones)
+        sp.input("codvotacion", mssql.Int, codvotacion)
         sp.output("CodMsj", mssql.Int)
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_iniciar', (error: any, results: any) => {
@@ -51,12 +51,12 @@ export async function IniciarVotacion(req: Request, res: Response) {
 
 export async function DetenerVotacion(req: Request, res: Response) {
     let Connection = null
-    const {codvotaciones} = req.params;
+    const {codvotacion} = req.params;
     try {
         Connection = await getConnection()
         const sp = await Connection.request();
 
-        sp.input("codvotacion", mssql.Int, codvotaciones)
+        sp.input("codvotacion", mssql.Int, codvotacion)
         sp.output("CodMsj", mssql.Int)
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_detener', (error: any, results: any) => {
