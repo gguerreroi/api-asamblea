@@ -15,7 +15,7 @@ export async function votaciones(req: Request, res: Response) {
         sp.execute('Votaciones.sp_core', (error: any, results: any) => {
 
             if (!error)
-                return res.status(200).send(JsonOut("1", "Lista de votaciones", results.recordset));
+                return res.status(200).send(JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
 
 
             return res.status(200).send(JsonOut("1", "Lista de votaciones", []));
@@ -27,7 +27,7 @@ export async function votaciones(req: Request, res: Response) {
     }
 }
 
-export async function IniciarVotacion(req: Request, res: Response){
+export async function IniciarVotacion(req: Request, res: Response) {
     let Connection = null
     const {codvotaciones} = req.params;
     try {
@@ -39,7 +39,7 @@ export async function IniciarVotacion(req: Request, res: Response){
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_iniciar', (error: any, results: any) => {
             if (!error)
-                return res.status(200).send(JsonOut('1', 'Lista de Opciones', results.recordset));
+                return res.status(200).send(JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
 
             return res.status(200).send(JsonOut('0', 'Sin Datos'));
         })
@@ -49,7 +49,7 @@ export async function IniciarVotacion(req: Request, res: Response){
     }
 }
 
-export async function DetenerVotacion(req: Request, res: Response){
+export async function DetenerVotacion(req: Request, res: Response) {
     let Connection = null
     const {codvotaciones} = req.params;
     try {
@@ -61,7 +61,7 @@ export async function DetenerVotacion(req: Request, res: Response){
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_detener', (error: any, results: any) => {
             if (!error)
-                return res.status(200).send(JsonOut('1', 'Lista de Opciones', results.recordset));
+                return res.status(200).send(JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
 
             return res.status(200).send(JsonOut('0', 'Sin Datos'));
         })
@@ -71,7 +71,7 @@ export async function DetenerVotacion(req: Request, res: Response){
     }
 }
 
-export async function iucore(req: Request, res: Response){
+export async function iucore(req: Request, res: Response) {
     let Connection = null
     const {codvotaciones} = req.params;
     const {strtitulo, strdescripcion} = req.body;
@@ -86,7 +86,7 @@ export async function iucore(req: Request, res: Response){
         sp.output("StrMsj", mssql.VarChar(400))
         sp.execute('Votaciones.sp_iucore', (error: any, results: any) => {
             if (!error)
-                return res.status(200).send(JsonOut('1', 'Lista de Opciones', results.recordset));
+                return res.status(200).send(JsonOut(results.output.CodMsj, results.output.StrMsj, results.recordset));
 
             return res.status(200).send(JsonOut('0', 'Sin Datos'));
         })
