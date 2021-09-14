@@ -37,6 +37,7 @@ export async function registro(req: Request,
     try {
         Connection = await getConnection()
         const sp = await Connection.request();
+
         sp.input("StrDpi", mssql.VarChar(100), strdpi)
         sp.input("StrTelefono", mssql.VarChar(100), strtelefono)
 
