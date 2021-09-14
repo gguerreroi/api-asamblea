@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.admin_login = exports.asociados_login = void 0;
+exports.admin_login = exports.asociados_login = exports.asociados_asistencia = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_1 = require("../database");
 const JsonOut_1 = require("../middlewares/JsonOut");
@@ -20,6 +20,12 @@ const config_1 = __importDefault(require("../config/config"));
 const createToken = (UserInfo) => {
     return jsonwebtoken_1.default.sign(UserInfo, config_1.default.jwtSecret);
 };
+const asociados_asistencia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let Connection = null;
+    console.log(req.body);
+    return res.status(200).send(JsonOut_1.JsonOut("1", "Asistencia registrada con exito", req.body));
+});
+exports.asociados_asistencia = asociados_asistencia;
 const asociados_login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let Connection = null;
     const { cui, cuenta } = req.body;

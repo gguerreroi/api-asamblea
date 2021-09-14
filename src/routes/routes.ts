@@ -18,4 +18,6 @@ r.get("/asamblea/resultados", Asamblea.resultados)
 r.get("/asamblea/asistencia", Asamblea.asistencia)
 r.post('/asamblea/votar/', Asamblea.emitirVoto)
 
+r.post('/asamblea/registro/', Asamblea.registro)
+
 export default r
